@@ -1,0 +1,16 @@
+[[pages]]
+path = "introduction.py"
+name = "Introduction"
+icon = "📖"
+
+[[pages]]
+path = "cnn.py"
+name = "CNN "
+icon = "📊"
+
+[[pages]]
+path = "unet.py"
+name = "U-Net"
+icon = "📄"
+
+
