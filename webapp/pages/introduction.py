@@ -7,12 +7,21 @@ import cv2
 import os
 import matplotlib.pyplot as plt
 from tensorflow.keras.models import load_model
+import path
 
-# Load the U-Net model
-unet_model = load_model('../model/unet_model_full.h5')
+dir = path.Path(__file__).abspath()
+sys.append.path(dir.parent.parent)
 
-# Load the CNN model
-cnn_model = load_model('../model/cnn_model_mask.h5')
+unet_model_path = './models/unet_model_full.h5'
+cnn_model_path = './models/cnn_model_mask.h5'
+
+
+with open(unet_model_path, 'rb') as file:
+    unet_model = load_model(file)
+
+with open(cnn_model_path, 'rb') as file:
+    cnn_model = load_model(file)
+
 
 # Function to convert image to grayscale and resize
 def convert_to_grayscale_and_resize(image_path, new_size=(625, 100)):
