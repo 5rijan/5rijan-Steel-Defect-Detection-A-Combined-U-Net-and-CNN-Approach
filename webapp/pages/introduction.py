@@ -305,7 +305,7 @@ Our experimental framework consists of:
 4. **Batch Size**: 32
 5. **Epochs**: 100 with early stopping based on validation loss""")
 
-st.image('../resources/output3.png', caption='Prediction output of a sample image', use_column_width=True)
+st.image(str(root_dir / 'resources' / 'output3.png'), caption='Prediction output of a sample image', use_column_width=True)
 
 st.markdown("""### 4.3 CNN Training
 
@@ -327,7 +327,7 @@ The U-Net model showed strong performance in identifying defect regions:
 2. **Pixel-wise Accuracy**: 92.5%
 """)
 
-st.image('../resources/output8.png', caption='Sample Image coeff and accuracy', use_column_width=True)
+st.image(str(root_dir / 'resources' / 'output8.png'), caption='Sample Image coeff and accuracy', use_column_width=True)
 
 st.markdown("""
 These metrics indicate that our U-Net model is highly effective at localizing defects, even when they occupy a small portion of the image.
@@ -382,9 +382,8 @@ While our current models demonstrate significant improvements in defect identifi
    
    However, this resulted in a reduction of the overall dataset size.""")
 
-st.image('../resources/output6.png', caption='Testing distribution before correction', use_column_width=True)
-st.image('../resources/output7.png', caption='Testing distribution after correction', use_column_width=True)
-
+st.image(str(root_dir / 'resources' / 'output6.png'), caption='Testing distribution before correction', use_column_width=True)
+st.image(str(root_dir / 'resources' / 'output7.png'), caption='Testing distribution after correction', use_column_width=True)
 
 st.markdown("""4. **Subjectivity in Ground Truth**: 
    The variability in human labeling introduces uncertainty in the ground truth, which can be modeled as:
