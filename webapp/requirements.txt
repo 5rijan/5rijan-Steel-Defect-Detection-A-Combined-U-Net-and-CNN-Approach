@@ -4,5 +4,4 @@ numpy
 st_pages
 tensorflow
 matplotlib
--e .
 
