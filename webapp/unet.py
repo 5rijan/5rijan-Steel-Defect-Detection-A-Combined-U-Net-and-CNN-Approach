@@ -68,12 +68,12 @@ def mask_generator(tags, image_path):
     return resized_array
 
 # Load CSV data
-CSV_PATH = root_dir / 'datasets' / 'data' / 'train.csv'
+CSV_PATH = root_dir / 'Datasets' / 'Severstal steel defect detection' / 'train.csv'
 data = pd.read_csv(CSV_PATH, header=None)
 
 # Get image paths and labels
 image_ids = data[0][1:].values
-IMAGE_DIR = root_dir / 'datasets' / 'data' / 'train_images'
+IMAGE_DIR = root_dir / 'Datasets' / 'Severstal steel defect detection' / 'train_images'
 image_paths = [IMAGE_DIR / image_id for image_id in image_ids]
 
 damage_data = data[2].values
