@@ -291,17 +291,14 @@ The Convolutional Neural Network (CNN) used for steel defect detection was train
    ```
    The model is trained on the mask data for 10 epochs, using a batch size of 32 and a validation split of 20%.
 
-#### Step 6. **Model Evaluation and Saving:**
-   The evaluation and saving process remains the same as before.
-
 This modified training process results in a CNN model capable of classifying steel defects into four categories based on masks generated from the original steel surface images.
 """)
 
 image_path_1 = root_dir / 'resources' / 'output4.png'
-st.image(str(image_path_1), caption='This is the image of test coverage and shit', use_column_width=True)
+st.image(str(image_path_1), caption='Performance Metrics', use_column_width=True)
 
 image_path_2 = root_dir / 'resources' / 'output5.png'
-st.image(str(image_path_2), caption='This is the image of test coverage and shit', use_column_width=True)
+st.image(str(image_path_2), caption='Confusion Matrix', use_column_width=True)
 
 
 # Detailed explanation of the CNN
