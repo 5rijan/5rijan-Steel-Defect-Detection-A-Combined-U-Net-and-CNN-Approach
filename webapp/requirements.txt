@@ -1,0 +1,9 @@
+streamlit
+pandas
+numpy
+st_pages
+PIL
+tensorflow
+matplotlib
+cv2
+os
