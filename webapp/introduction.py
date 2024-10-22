@@ -451,5 +451,4 @@ bibtex_entry = textwrap.dedent("""
     }
 """)
 st.sidebar.code(bibtex_entry, language="bibtex")
-st.sidebar.markdown("Copy this BibTeX entry to cite this project.")
 
