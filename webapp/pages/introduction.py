@@ -5,23 +5,22 @@ import pandas as pd
 from PIL import Image
 import cv2
 import os
+import sys
 import matplotlib.pyplot as plt
 from tensorflow.keras.models import load_model
-import path
+from pathlib import Path
 
-dir = path.Path(__file__).abspath()
-sys.append.path(dir.parent.parent)
+# Get the directory of the current file
+current_dir = Path(__file__).resolve().parent
+# Add the parent directory to sys.path
+sys.path.append(str(current_dir.parent))
 
-unet_model_path = './models/unet_model_full.h5'
-cnn_model_path = './models/cnn_model_mask.h5'
+unet_model_path = current_dir.parent / 'models' / 'unet_model_full.h5'
+cnn_model_path = current_dir.parent / 'models' / 'cnn_model_mask.h5'
 
-
-with open(unet_model_path, 'rb') as file:
-    unet_model = load_model(file)
-
-with open(cnn_model_path, 'rb') as file:
-    cnn_model = load_model(file)
-
+# Load models
+unet_model = load_model(str(unet_model_path))
+cnn_model = load_model(str(cnn_model_path))
 
 # Function to convert image to grayscale and resize
 def convert_to_grayscale_and_resize(image_path, new_size=(625, 100)):
