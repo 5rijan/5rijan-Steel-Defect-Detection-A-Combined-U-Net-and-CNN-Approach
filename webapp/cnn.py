@@ -6,6 +6,8 @@ from PIL import Image
 import os
 import matplotlib.pyplot as plt
 from pathlib import Path
+import cv2
+
 
 # Get the directory of the current file and navigate up to the root
 current_dir = Path(__file__).resolve().parent
