@@ -440,9 +440,10 @@ We are also grateful to Severstal for providing the dataset that was crucial for
 """)
 st.sidebar.header("Project Resources")
 
-# Button to link to all notebooks
+# Create a button-like element for the notebooks link
 notebooks_url = "https://github.com/5rijan/5rijan-Steel-Defect-Detection-A-Combined-U-Net-and-CNN-Approach/tree/main/notebooks"
-st.sidebar.markdown(f"[View All Notebooks]({notebooks_url})")
+if st.sidebar.button("View All Notebooks 📚"):
+    st.sidebar.markdown(f"[Click here to open notebooks]({notebooks_url})")
 
 st.sidebar.header("Citation")
 bibtex_entry = textwrap.dedent("""
