@@ -434,4 +434,4 @@ During training, the model's accuracy and loss are plotted for both the training
 """)
 
 image_path = root_dir / 'resources' / 'output2.png'
-st.image(str(image_path), caption='Training and Validation Accuracy/Loss', use_column_width=True)
+st.image(str(image_path), caption='Confusion Matrix', use_column_width=True)
