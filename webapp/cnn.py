@@ -187,7 +187,7 @@ st.markdown("""
 
 The Convolutional Neural Network (CNN) used for steel defect detection was trained using the following steps:
 
-1. **Data Preparation:**
+#### Step 1. **Data Preparation:**
    ```python
    # Load and preprocess the data
    CSV_PATH = "../Datasets/Severstal steel defect detection/train.csv"
@@ -204,7 +204,7 @@ The Convolutional Neural Network (CNN) used for steel defect detection was train
    ```
    This step involves loading the CSV file containing image information and preprocessing it for further use.
 
-2. **Data Balancing:**
+#### Step 2. **Data Balancing:**
    ```python
    # Separate the dataset by grades
    grade_1 = data[data['grade'] == 1]
@@ -223,7 +223,7 @@ The Convolutional Neural Network (CNN) used for steel defect detection was train
    ```
    To address class imbalance, we downsampled the overrepresented class (grade 3) and combined it with other classes to create a balanced dataset.
 
-3. **Mask Generation:**
+#### Step 3. **Mask Generation:**
    ```python
    def mask_generator(tags, image_path):
        en_pix = tags.split()
@@ -268,7 +268,7 @@ The Convolutional Neural Network (CNN) used for steel defect detection was train
    ```
    Instead of using the original images, we generate masks based on the encoded pixels information. These masks are then used as input to the CNN.
 
-4. **Model Architecture:**
+#### Step 4. **Model Architecture:**
    ```python
    model = Sequential([
        Conv2D(32, (3, 3), activation='relu', input_shape=(100, 625, 1)),
@@ -285,13 +285,13 @@ The Convolutional Neural Network (CNN) used for steel defect detection was train
    ```
    The CNN architecture remains the same, but now it's trained on the mask data instead of the original images.
 
-5. **Model Training:**
+#### Step 5. **Model Training:**
    ```python
    history = model.fit(train_x, train_y, epochs=10, batch_size=32, validation_split=0.2)
    ```
    The model is trained on the mask data for 10 epochs, using a batch size of 32 and a validation split of 20%.
 
-6. **Model Evaluation and Saving:**
+#### Step 6. **Model Evaluation and Saving:**
    The evaluation and saving process remains the same as before.
 
 This modified training process results in a CNN model capable of classifying steel defects into four categories based on masks generated from the original steel surface images.
