@@ -460,5 +460,7 @@ if st.sidebar.button("View All Notebooks 📚"):
     # Display individual notebook links
     st.sidebar.markdown("- [CNN Image](https://github.com/5rijan/5rijan-Steel-Defect-Detection-A-Combined-U-Net-and-CNN-Approach/blob/main/notebooks/cnn_image.ipynb)")
     st.sidebar.markdown("- [CNN Mask](https://github.com/5rijan/5rijan-Steel-Defect-Detection-A-Combined-U-Net-and-CNN-Approach/blob/main/notebooks/cnn_mask.ipynb)")
+    st.sidebar.markdown("- [U-Net Training](https://github.com/5rijan/5rijan-Steel-Defect-Detection-A-Combined-U-Net-and-CNN-Approach/blob/main/notebooks/unet.ipynb)")
     st.sidebar.markdown("- [U-Net Test](https://github.com/5rijan/5rijan-Steel-Defect-Detection-A-Combined-U-Net-and-CNN-Approach/blob/main/notebooks/test_001.ipynb)")
+
     st.sidebar.markdown
