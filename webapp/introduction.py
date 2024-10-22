@@ -18,8 +18,8 @@ root_dir = current_dir.parent.parent
 sys.path.append(str(root_dir))
 
 # Update paths to match your project structure
-unet_model_path = root_dir / 'webapp' / 'models' / 'unet_model_full.h5'
-cnn_model_path = root_dir / 'webapp' / 'models' / 'cnn_model_mask.h5'
+unet_model_path = root_dir / '..' / 'models' / 'unet_model_full.h5'
+cnn_model_path = root_dir / '..' / 'models' / 'cnn_model_mask.h5'
 CSV_PATH = root_dir / 'Datasets' / 'Severstal steel defect detection' / 'train.csv'
 IMAGE_DIR = root_dir / 'Datasets' / 'Severstal steel defect detection' / 'train_images'
 
