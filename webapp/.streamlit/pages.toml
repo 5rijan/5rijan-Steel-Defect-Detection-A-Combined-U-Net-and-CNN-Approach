@@ -1,14 +1,14 @@
 [[pages]]
 path = "introduction.py"
 name = "Introduction"
-icon = "📄"
+icon = "📖"
 
 [[pages]]
 path = "cnn.py"
 name = "CNN"
-icon = ":material/history:"
+icon = "💾"
 
 [[pages]]
 path = "unet.py"
 name = "U-Net"
-icon = "📖"
+icon = "📊"
