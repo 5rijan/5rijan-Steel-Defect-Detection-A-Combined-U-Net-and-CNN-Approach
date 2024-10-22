@@ -6,13 +6,15 @@ from PIL import Image
 import cv2
 import os
 from tensorflow.keras.models import load_model, Model
+from pathlib import Path
 
+# Get the directory of the current file and navigate up to the root
+current_dir = Path(__file__).resolve().parent
+root_dir = current_dir.parent
 
 # Load model and define layers
-model = load_model('unet_model_full.h5')
-# Load the U-Net model
-model_path = 'unet_model_full.h5'
-model = load_model(model_path)
+model_path = current_dir / 'models' / 'unet_model_full.h5'
+model = load_model(str(model_path))
 
 # Define layer names for extracting intermediate outputs
 layer_names = ['conv2d', 'conv2d_1', 'max_pooling2d', 
@@ -46,7 +48,7 @@ def mask_generator(tags, image_path):
     rle_pixels = [list(range(pixel[i], pixel[i] + pixel_count[i])) for i in range(len(pixel))]
     rle_mask_pixels = sum(rle_pixels, [])
 
-    img = cv2.imread(image_path)
+    img = cv2.imread(str(image_path))
     if img is None:
         raise ValueError(f"Image not found at {image_path}")
 
@@ -66,12 +68,13 @@ def mask_generator(tags, image_path):
     return resized_array
 
 # Load CSV data
-CSV_PATH = "../Datasets/Severstal steel defect detection/train.csv"
+CSV_PATH = root_dir / 'datasets' / 'data' / 'train.csv'
 data = pd.read_csv(CSV_PATH, header=None)
 
 # Get image paths and labels
 image_ids = data[0][1:].values
-image_paths = [f"../Datasets/Severstal steel defect detection/train_images/{image_id}" for image_id in image_ids]
+IMAGE_DIR = root_dir / 'datasets' / 'data' / 'train_images'
+image_paths = [IMAGE_DIR / image_id for image_id in image_ids]
 
 damage_data = data[2].values
 
@@ -171,13 +174,13 @@ By leveraging the U-Net architecture, this application effectively identifies an
 """)
 # Select an image from the list
 selected_image_id = st.selectbox("Choose an image", image_ids)
-selected_image_path = f"../Datasets/Severstal steel defect detection/train_images/{selected_image_id}"
+selected_image_path = IMAGE_DIR / selected_image_id
 selected_damage = data[data[0] == selected_image_id][2].values[0]
 
 # Display the selected image
-if os.path.exists(selected_image_path):
-    st.image(selected_image_path, caption="Selected Image", use_column_width=True)
-    input_image = convert_to_grayscale_and_resize(selected_image_path)
+if selected_image_path.exists():
+    st.image(str(selected_image_path), caption="Selected Image", use_column_width=True)
+    input_image = convert_to_grayscale_and_resize(str(selected_image_path))
     
     # Normalize the input image for prediction
     sample_input = np.expand_dims(input_image / 255.0, axis=0)
@@ -230,7 +233,7 @@ if os.path.exists(selected_image_path):
 
     # Overlay masks on the original image
     st.subheader("Overlay Masks on Original Image")
-    original_image = cv2.imread(selected_image_path, cv2.IMREAD_GRAYSCALE)
+    original_image = cv2.imread(str(selected_image_path), cv2.IMREAD_GRAYSCALE)
     original_image_resized = cv2.resize(original_image, (625, 100))
 
     # Create overlay images
@@ -240,8 +243,6 @@ if os.path.exists(selected_image_path):
     col1, col2 = st.columns(2)
     col1.image(overlay_ground_truth, caption="Overlay Ground Truth", use_column_width=True)
     col2.image(overlay_prediction, caption="Overlay Prediction", use_column_width=True)
-
-
 
 # Header and introduction
 st.markdown("""
@@ -277,8 +278,8 @@ The `convert_to_grayscale_and_resize` function takes an image path and a target 
 """)
 
 # Visualization of the preprocessed image
-image_path_example = "../Datasets/Severstal steel defect detection/train_images/000a4bcdd.jpg"
-img = convert_to_grayscale_and_resize(image_path_example, new_size=(625, 100))
+image_path_example = IMAGE_DIR / "000a4bcdd.jpg"
+img = convert_to_grayscale_and_resize(str(image_path_example), new_size=(625, 100))
 st.image(img, caption="Grayscale and Resized Image", use_column_width=True)
 
 # Step 2 explanation
@@ -325,7 +326,7 @@ The `mask_generator` function takes RLE-encoded mask data and the corresponding 
 """)
 
 # Visualization of the mask
-mask_example = mask_generator("37607 3 37858 8 38108 14 38359 20 38610 25 38863 28 39119 28 39375 29 39631 29 39887 29 40143 29 40399 29 40655 30 40911 30 41167 30 41423 30 41679 31 41935 31 42191 31 42447 31 42703 31 42960 31 43216 31 43472 31 43728 31 43984 31 44240 32 44496 32 44752 32 45008 32 45264 33 45520 33 45776 33 46032 33 46288 33 46544 34 46803 31 47065 25 47327 19 47588 15 47850 9 48112 3 62667 12 62923 23 63179 23 63348 3 63435 23 63604 7 63691 23 63860 11 63947 23 64116 15 64203 23 64372 19 64459 23 64628 24 64715 23 64884 28 64971 23 65139 33 65227 23 65395 37 65483 23 65651 41 65740 22 65907 45 65996 22 66163 48 66252 22 66419 48 66508 22 66675 48 66764 22 66931 48 67020 22 67187 48 67276 20 67443 48 67532 16 67699 48 67788 13 67955 48 68044 9 68210 49 68300 6 68466 49 68556 2 68722 50 68978 50 69234 50 69490 50 69746 50 70009 43 70277 31 70545 19 70813 7 73363 5 73619 14 73875 23 74131 31 74387 40 74643 45 74899 46 75155 46 75411 47 75667 47 75923 48 76179 49 76435 49 76691 50 76947 50 77203 50 77459 50 77715 50 77971 50 78227 50 78483 50 78739 50 78995 50 79251 50 79507 50 79763 50 80019 50 80275 50 80531 50 80789 48 81048 45 81308 41 81567 38 81826 35 82085 32 82345 28 82604 23 82863 18 83122 13 83382 7 83641 2 86637 16 86893 31 87149 31 87405 31 87661 31 87917 32 88173 32 88429 32 88685 32 88941 32 89197 32 89453 32 89709 32 89965 33 90221 33 90306 35 90477 33 90562 35 90733 33 90818 35 90989 16 91074 35 91330 35 91586 35 91842 35 92098 35 92354 35 92610 35 92866 35 93122 35 93378 35 93635 34 93891 34 94147 34 94403 34 94659 34 94915 34 95171 34 95427 34 95623 9 95683 30 95879 18 95939 24 96135 18 96195 17 96390 19 96451 10 96646 19 96707 4 96902 20 97158 20 97414 20 97670 20 97925 21 98181 21 98437 22 98693 22 98949 22 99205 22 99460 23 99716 23 99972 24 100228 24 100484 24 100739 25 100995 25 101251 25 101507 26 101763 26 101820 5 102019 26 102076 13 102274 27 102332 18 102530 27 102587 19 102786 26 102843 20 103042 26 103099 20 103298 26 103355 20 103554 26 103611 20 103809 27 103866 22 104065 26 104122 22 104321 26 104378 22 104579 24 104634 21 104837 22 104889 22 105095 19 105145 22 105354 16 105401 21 105612 14 105657 21 105870 12 105913 20 106128 10 106168 21 106387 6 106424 15 106645 4 106680 5 106903 2 111614 3 111864 9 112114 15 112364 21 112440 8 112617 24 112696 22 112873 24 112952 36 113129 24 113208 43 113385 24 113464 43 113641 24 113720 43 113897 24 113976 43 114153 24 114232 43 114409 24 114488 43 114665 24 114744 43 114921 24 115000 43 115177 24 115256 43 115433 24 115512 43 115689 24 115768 43 115945 24 116024 43 116201 24 116280 43 116457 24 116536 43 116713 24 116792 43 116969 24 117048 43 117225 24 117310 37 117493 12 117576 27 117843 16 118109 6", "../Datasets/Severstal steel defect detection/train_images/000a4bcdd.jpg")
+mask_example = mask_generator("37607 3 37858 8 38108 14 38359 20 38610 25 38863 28 39119 28 39375 29 39631 29 39887 29 40143 29 40399 29 40655 30 40911 30 41167 30 41423 30 41679 31 41935 31 42191 31 42447 31 42703 31 42960 31 43216 31 43472 31 43728 31 43984 31 44240 32 44496 32 44752 32 45008 32 45264 33 45520 33 45776 33 46032 33 46288 33 46544 34 46803 31 47065 25 47327 19 47588 15 47850 9 48112 3 62667 12 62923 23 63179 23 63348 3 63435 23 63604 7 63691 23 63860 11 63947 23 64116 15 64203 23 64372 19 64459 23 64628 24 64715 23 64884 28 64971 23 65139 33 65227 23 65395 37 65483 23 65651 41 65740 22 65907 45 65996 22 66163 48 66252 22 66419 48 66508 22 66675 48 66764 22 66931 48 67020 22 67187 48 67276 20 67443 48 67532 16 67699 48 67788 13 67955 48 68044 9 68210 49 68300 6 68466 49 68556 2 68722 50 68978 50 69234 50 69490 50 69746 50 70009 43 70277 31 70545 19 70813 7 73363 5 73619 14 73875 23 74131 31 74387 40 74643 45 74899 46 75155 46 75411 47 75667 47 75923 48 76179 49 76435 49 76691 50 76947 50 77203 50 77459 50 77715 50 77971 50 78227 50 78483 50 78739 50 78995 50 79251 50 79507 50 79763 50 80019 50 80275 50 80531 50 80789 48 81048 45 81308 41 81567 38 81826 35 82085 32 82345 28 82604 23 82863 18 83122 13 83382 7 83641 2 86637 16 86893 31 87149 31 87405 31 87661 31 87917 32 88173 32 88429 32 88685 32 88941 32 89197 32 89453 32 89709 32 89965 33 90221 33 90306 35 90477 33 90562 35 90733 33 90818 35 90989 16 91074 35 91330 35 91586 35 91842 35 92098 35 92354 35 92610 35 92866 35 93122 35 93378 35 93635 34 93891 34 94147 34 94403 34 94659 34 94915 34 95171 34 95427 34 95623 9 95683 30 95879 18 95939 24 96135 18 96195 17 96390 19 96451 10 96646 19 96707 4 96902 20 97158 20 97414 20 97670 20 97925 21 98181 21 98437 22 98693 22 98949 22 99205 22 99460 23 99716 23 99972 24 100228 24 100484 24 100739 25 100995 25 101251 25 101507 26 101763 26 101820 5 102019 26 102076 13 102274 27 102332 18 102530 27 102587 19 102786 26 102843 20 103042 26 103099 20 103298 26 103355 20 103554 26 103611 20 103809 27 103866 22 104065 26 104122 22 104321 26 104378 22 104579 24 104634 21 104837 22 104889 22 105095 19 105145 22 105354 16 105401 21 105612 14 105657 21 105870 12 105913 20 106128 10 106168 21 106387 6 106424 15 106645 4 106680 5 106903 2 111614 3 111864 9 112114 15 112364 21 112440 8 112617 24 112696 22 112873 24 112952 36 113129 24 113208 43 113385 24 113464 43 113641 24 113720 43 113897 24 113976 43 114153 24 114232 43 114409 24 114488 43 114665 24 114744 43 114921 24 115000 43 115177 24 115256 43 115433 24 115512 43 115689 24 115768 43 115945 24 116024 43 116201 24 116280 43 116457 24 116536 43 116713 24 116792 43 116969 24 117048 43 117225 24 117310 37 117493 12 117576 27 117843 16 118109 6", str(image_path_example))
 st.image(mask_example, caption="Generated Mask", use_column_width=True)
 
 # Step 3 explanation
@@ -432,9 +433,5 @@ st.markdown("""
 During training, the model's accuracy and loss are plotted for both the training and validation sets to monitor progress and detect overfitting. The results indicate how well the model is learning to identify defects.
 """)
 
-image_path = '../resources/output2.png'
-
-st.image(image_path, caption='This is the image of test coverage and shit', use_column_width=True)
-
-
-
+image_path = root_dir / 'resources' / 'output2.png'
+st.image(str(image_path), caption='Training and Validation Accuracy/Loss', use_column_width=True)
