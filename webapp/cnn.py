@@ -5,11 +5,15 @@ import pandas as pd
 from PIL import Image
 import os
 import matplotlib.pyplot as plt
-import cv2
+from pathlib import Path
+
+# Get the directory of the current file and navigate up to the root
+current_dir = Path(__file__).resolve().parent
+root_dir = current_dir.parent
 
 # Load the pre-trained CNN model
-model_path = 'cnn_model_mask.h5'
-model = tf.keras.models.load_model(model_path)
+model_path = current_dir / 'models' / 'cnn_model_mask.h5'
+model = tf.keras.models.load_model(str(model_path))
 
 # Function to generate masks using the given tags and image path
 def mask_generator(tags, image_path):
@@ -58,31 +62,35 @@ def get_intermediate_outputs(image, model):
     return activations
 
 # Load CSV data
-CSV_PATH = "../Datasets/Severstal steel defect detection/train.csv"
+CSV_PATH = root_dir / 'Datasets' / 'Severstal steel defect detection' / 'train.csv'
 data = pd.read_csv(CSV_PATH)
+
+# Rename columns for clarity
+data = data.rename(columns={'ImageId': 'image_name', 'ClassId': 'grade', 'EncodedPixels': 'tags'})
 
 # Rename columns for clarity
 data = data.rename(columns={'ImageId': 'image_name', 'ClassId': 'grade', 'EncodedPixels': 'tags'})
 
 # Get image paths and labels
 image_ids = data['image_name'].values
-image_paths = [f"../Datasets/Severstal steel defect detection/train_images/{image_id}" for image_id in image_ids]
+IMAGE_DIR = root_dir / 'Datasets' / 'Severstal steel defect detection' / 'train_images'
+image_paths = [IMAGE_DIR / image_id for image_id in image_ids]
 
 # Streamlit app
 st.title("Steel Defect Detection: CNN Classification Process")
 
 # Select an image from the list
 selected_image_id = st.selectbox("Choose an image", image_ids)
-selected_image_path = f"../Datasets/Severstal steel defect detection/train_images/{selected_image_id}"
+selected_image_path = IMAGE_DIR / selected_image_id
 selected_damage = data[data['image_name'] == selected_image_id]['grade'].values[0]
 selected_tags = data[data['image_name'] == selected_image_id]['tags'].values[0]
 
 # Display the selected image
 if os.path.exists(selected_image_path):
-    st.image(selected_image_path, caption="Selected Image", use_column_width=True)
+    st.image(str(selected_image_path), caption="Selected Image", use_column_width=True)
     
     # Preprocess the image
-    preprocessed_image = preprocess_image(selected_image_path, selected_tags)
+    preprocessed_image = preprocess_image(str(selected_image_path), selected_tags)
     
     # Ensure the preprocessed image has the correct shape
     if preprocessed_image.shape != (1, 100, 625, 1):
@@ -287,14 +295,11 @@ The Convolutional Neural Network (CNN) used for steel defect detection was train
 This modified training process results in a CNN model capable of classifying steel defects into four categories based on masks generated from the original steel surface images.
 """)
 
-image_path = '../resources/output4.png'
+image_path_1 = root_dir / 'resources' / 'output4.png'
+st.image(str(image_path_1), caption='This is the image of test coverage and shit', use_column_width=True)
 
-st.image(image_path, caption='This is the image of test coverage and shit', use_column_width=True)
-
-
-image_path = '../resources/output5.png'
-
-st.image(image_path, caption='This is the image of test coverage and shit', use_column_width=True)
+image_path_2 = root_dir / 'resources' / 'output5.png'
+st.image(str(image_path_2), caption='This is the image of test coverage and shit', use_column_width=True)
 
 
 # Detailed explanation of the CNN
