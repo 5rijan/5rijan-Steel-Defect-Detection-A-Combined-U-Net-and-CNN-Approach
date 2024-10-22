@@ -20,8 +20,8 @@ sys.path.append(str(root_dir))
 # Update paths to match your project structure
 unet_model_path = root_dir / 'webapp' / 'models' / 'unet_model_full.h5'
 cnn_model_path = root_dir / 'webapp' / 'models' / 'cnn_model_mask.h5'
-CSV_PATH = root_dir / 'datasets' / 'Severstal steel defect detection' / 'train.csv'
-IMAGE_DIR = root_dir / 'datasets' / 'Severstal steel defect detection' / 'train_images'
+CSV_PATH = root_dir / 'Datasets' / 'Severstal steel defect detection' / 'train.csv'
+IMAGE_DIR = root_dir / 'Datasets' / 'Severstal steel defect detection' / 'train_images'
 
 # Load models
 unet_model = load_model(str(unet_model_path))
