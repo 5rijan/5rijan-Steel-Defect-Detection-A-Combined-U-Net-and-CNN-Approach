@@ -451,11 +451,14 @@ bibtex_entry = textwrap.dedent("""
 """)
 st.sidebar.code(bibtex_entry, language="bibtex")
 
-
 st.sidebar.header("Project Resources")
 
 # Create a button-like element for the notebooks link
-notebooks_url = "https://github.com/5rijan/5rijan-Steel-Defect-Detection-A-Combined-U-Net-and-CNN-Approach/tree/main/notebooks"
 if st.sidebar.button("View All Notebooks 📚"):
-    st.sidebar.markdown(f"[Click here to open notebooks]({notebooks_url})")
-
+    st.sidebar.markdown("### Available Notebooks:")
+    
+    # Display individual notebook links
+    st.sidebar.markdown("- [CNN Image](https://github.com/5rijan/5rijan-Steel-Defect-Detection-A-Combined-U-Net-and-CNN-Approach/blob/main/notebooks/cnn_image.ipynb)")
+    st.sidebar.markdown("- [CNN Mask](https://github.com/5rijan/5rijan-Steel-Defect-Detection-A-Combined-U-Net-and-CNN-Approach/blob/main/notebooks/cnn_mask.ipynb)")
+    st.sidebar.markdown("- [U-Net Test](https://github.com/5rijan/5rijan-Steel-Defect-Detection-A-Combined-U-Net-and-CNN-Approach/blob/main/notebooks/test_001.ipynb)")
+    st.sidebar.markdown
