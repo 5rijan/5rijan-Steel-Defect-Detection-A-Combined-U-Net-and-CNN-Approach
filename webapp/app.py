@@ -13,8 +13,18 @@ pages = [
 # Show the pages in the sidebar
 show_pages(pages)
 
-# Add the title to the current page
-add_page_title()
+# Redirect to the introduction page
+import streamlit.components.v1 as components
 
-# Main content area
-st.write("Welcome to the main page. Please select a page from the sidebar.")
+components.html(
+    """
+    <script>
+    if (window.location.pathname === '/') {
+        window.location.href = '?page=introduction';
+    }
+    </script>
+    """,
+    height=0,
+)
+
+# The rest of your app.py content (if any) goes here
