@@ -9,10 +9,10 @@ import matplotlib.pyplot as plt
 from tensorflow.keras.models import load_model
 
 # Load the U-Net model
-unet_model = load_model('unet_model_full.h5')
+unet_model = load_model('./model/unet_model_full.h5')
 
 # Load the CNN model
-cnn_model = load_model('cnn_model_mask.h5')
+cnn_model = load_model('./model/cnn_model_mask.h5')
 
 # Function to convert image to grayscale and resize
 def convert_to_grayscale_and_resize(image_path, new_size=(625, 100)):
