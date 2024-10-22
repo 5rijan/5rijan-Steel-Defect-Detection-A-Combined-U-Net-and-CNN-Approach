@@ -137,7 +137,6 @@ if selected_image_path.exists():
     ax.set_title('Defect Class Probabilities')
     st.pyplot(fig)
 
-
 # Introduction
 st.markdown("""
 ## Abstract
