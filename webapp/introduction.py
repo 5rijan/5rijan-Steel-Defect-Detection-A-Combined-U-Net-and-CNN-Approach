@@ -438,12 +438,6 @@ We extend our sincere gratitude to the University of Sydney for providing the re
 We would like to express our deepest appreciation to our professor, Dr. Teng Joon Lim, for his guidance and expertise throughout this project. Special thanks to our tutor, Jack Wang, for his constant feedback, suggestions, and invaluable support that significantly enhanced the quality of our work.
 We are also grateful to Severstal for providing the dataset that was crucial for this research. Additionally, we thank the open-source community for developing and maintaining the tools and libraries that made this work possible.
 """)
-st.sidebar.header("Project Resources")
-
-# Create a button-like element for the notebooks link
-notebooks_url = "https://github.com/5rijan/5rijan-Steel-Defect-Detection-A-Combined-U-Net-and-CNN-Approach/tree/main/notebooks"
-if st.sidebar.button("View All Notebooks 📚"):
-    st.sidebar.markdown(f"[Click here to open notebooks]({notebooks_url})")
 
 st.sidebar.header("Citation")
 bibtex_entry = textwrap.dedent("""
@@ -456,3 +450,12 @@ bibtex_entry = textwrap.dedent("""
     }
 """)
 st.sidebar.code(bibtex_entry, language="bibtex")
+
+
+st.sidebar.header("Project Resources")
+
+# Create a button-like element for the notebooks link
+notebooks_url = "https://github.com/5rijan/5rijan-Steel-Defect-Detection-A-Combined-U-Net-and-CNN-Approach/tree/main/notebooks"
+if st.sidebar.button("View All Notebooks 📚"):
+    st.sidebar.markdown(f"[Click here to open notebooks]({notebooks_url})")
+
