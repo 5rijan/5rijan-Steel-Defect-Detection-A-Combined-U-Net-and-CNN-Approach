@@ -6,17 +6,17 @@ st.set_page_config(layout="wide")
 # TOML content as a Python string
 toml_content = """
 [[pages]]
-path = "../introduction.py"
+path = "/introduction.py"
 name = "Introduction"
 icon = "📖"
 
 [[pages]]
-path = "../cnn.py"
+path = "/cnn.py"
 name = "CNN "
 icon = "📊"
 
 [[pages]]
-path = "../unet.py"
+path = "/unet.py"
 name = "U-Net"
 icon = "📄"
 """
