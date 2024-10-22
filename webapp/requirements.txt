@@ -4,4 +4,7 @@ numpy
 st_pages
 tensorflow
 matplotlib
+cv2
+os
+
 
