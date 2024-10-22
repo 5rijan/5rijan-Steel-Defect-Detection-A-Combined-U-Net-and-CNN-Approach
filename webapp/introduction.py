@@ -5,6 +5,7 @@ import pandas as pd
 from PIL import Image
 import cv2
 import os
+import textwrap
 import sys
 import matplotlib.pyplot as plt
 from tensorflow.keras.models import load_model
@@ -437,3 +438,18 @@ We extend our sincere gratitude to the University of Sydney for providing the re
 We would like to express our deepest appreciation to our professor, Dr. Teng Joon Lim, for his guidance and expertise throughout this project. Special thanks to our tutor, Jack Wang, for his constant feedback, suggestions, and invaluable support that significantly enhanced the quality of our work.
 We are also grateful to Severstal for providing the dataset that was crucial for this research. Additionally, we thank the open-source community for developing and maintaining the tools and libraries that made this work possible.
 """)
+
+
+st.sidebar.header("Citation")
+bibtex_entry = textwrap.dedent("""
+    @misc{srijan2024steel,
+      author = {Srijan Chaudhary},
+      title = {Steel Defect Detection: A Combined U-Net and CNN Approach},
+      year = {2024},
+      publisher = {GitHub},
+      howpublished = {\\url{https://github.com/5rijan/5rijan-Steel-Defect-Detection-A-Combined-U-Net-and-CNN-Approach}},
+    }
+""")
+st.sidebar.code(bibtex_entry, language="bibtex")
+st.sidebar.markdown("Copy this BibTeX entry to cite this project.")
+
