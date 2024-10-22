@@ -10,13 +10,18 @@ import matplotlib.pyplot as plt
 from tensorflow.keras.models import load_model
 from pathlib import Path
 
-# Get the directory of the current file
+# Get the directory of the current file and navigate up to the root
 current_dir = Path(__file__).resolve().parent
-# Add the parent directory to sys.path
-sys.path.append(str(current_dir.parent))
+root_dir = current_dir.parent.parent
 
-unet_model_path = current_dir.parent / 'models' / 'unet_model_full.h5'
-cnn_model_path = current_dir.parent / 'models' / 'cnn_model_mask.h5'
+# Add the root directory to sys.path
+sys.path.append(str(root_dir))
+
+# Update paths to match your project structure
+unet_model_path = root_dir / 'webapp' / 'models' / 'unet_model_full.h5'
+cnn_model_path = root_dir / 'webapp' / 'models' / 'cnn_model_mask.h5'
+CSV_PATH = root_dir / 'datasets' / 'Severstal steel defect detection' / 'train.csv'
+IMAGE_DIR = root_dir / 'datasets' / 'Severstal steel defect detection' / 'train_images'
 
 # Load models
 unet_model = load_model(str(unet_model_path))
@@ -40,7 +45,7 @@ def mask_generator(tags, image_path):
     rle_pixels = [list(range(pixel[i], pixel[i] + pixel_count[i])) for i in range(len(pixel))]
     rle_mask_pixels = sum(rle_pixels, [])
 
-    img = cv2.imread(image_path)
+    img = cv2.imread(str(image_path))
     if img is None:
         raise ValueError(f"Image not found at {image_path}")
 
@@ -57,7 +62,6 @@ def mask_generator(tags, image_path):
     return resized_array
 
 # Load CSV data
-CSV_PATH = "../Datasets/Severstal steel defect detection/train.csv"
 data = pd.read_csv(CSV_PATH)
 
 # Rename columns for clarity
@@ -65,32 +69,32 @@ data = data.rename(columns={'ImageId': 'image_name', 'ClassId': 'grade', 'Encode
 
 # Get image paths and labels
 image_ids = data['image_name'].values
-image_paths = [f"../Datasets/Severstal steel defect detection/train_images/{image_id}" for image_id in image_ids]
+image_paths = [IMAGE_DIR / image_id for image_id in image_ids]
 
 st.title("Steel Defect Detection: A Combined U-Net and CNN Approach")
 
 # Select an image from the list
 selected_image_id = st.selectbox("Choose an image to analyze", image_ids)
-selected_image_path = f"../Datasets/Severstal steel defect detection/train_images/{selected_image_id}"
+selected_image_path = IMAGE_DIR / selected_image_id
 selected_damage = data[data['image_name'] == selected_image_id]['grade'].values[0]
 selected_tags = data[data['image_name'] == selected_image_id]['tags'].values[0]
 
 # Display the selected image and results
-if os.path.exists(selected_image_path):
+if selected_image_path.exists():
     st.subheader("Analysis Results")
     
     col1, col2 = st.columns(2)
     
     with col1:
-        st.image(selected_image_path, caption="Selected Image", use_column_width=True)
+        st.image(str(selected_image_path), caption="Selected Image", use_column_width=True)
     
     # Process the image for U-Net
-    input_image = convert_to_grayscale_and_resize(selected_image_path)
+    input_image = convert_to_grayscale_and_resize(str(selected_image_path))
     sample_input = np.expand_dims(input_image / 255.0, axis=0)
     sample_input = np.expand_dims(sample_input, axis=-1)
 
     # Generate ground truth mask
-    ground_truth_mask = mask_generator(selected_tags, selected_image_path)
+    ground_truth_mask = mask_generator(selected_tags, str(selected_image_path))
 
     # Make predictions using U-Net
     unet_prediction = unet_model.predict(sample_input)
@@ -101,7 +105,7 @@ if os.path.exists(selected_image_path):
         binary_prediction = cv2.resize(binary_prediction, (input_image.shape[1], input_image.shape[0]))
 
     # Create overlay images
-    original_image = cv2.imread(selected_image_path, cv2.IMREAD_GRAYSCALE)
+    original_image = cv2.imread(str(selected_image_path), cv2.IMREAD_GRAYSCALE)
     original_image_resized = cv2.resize(original_image, (625, 100))
     overlay_ground_truth = cv2.addWeighted(original_image_resized, 0.7, ground_truth_mask * 255, 0.3, 0)
     overlay_prediction = cv2.addWeighted(original_image_resized, 0.7, binary_prediction * 255, 0.3, 0)
@@ -132,7 +136,6 @@ if os.path.exists(selected_image_path):
     ax.set_ylabel('Probability')
     ax.set_title('Defect Class Probabilities')
     st.pyplot(fig)
-
 
 
 # Introduction
