@@ -113,18 +113,22 @@ if selected_image_path.exists():
     cnn_prediction = cnn_model.predict(cnn_input)
     predicted_class = np.argmax(cnn_prediction) + 1  # Add 1 to match the 1-4 class range
 
-    # Now create columns and display images
-    col1, col2, col3 = st.columns(3)
-    
-    with col1:
-        st.image(str(selected_image_path), caption="Selected Image", use_column_width=True)
+    # Now display images in rows
+    # Row 1: Selected Image
+    st.image(str(selected_image_path), caption="Selected Image", use_column_width=True)
 
-    with col2:
+    # Row 2: Masks
+    col1, col2 = st.columns(2)
+    with col1:
         st.image(ground_truth_mask * 255, caption="Ground Truth Mask", use_column_width=True)
+    with col2:
         st.image(binary_prediction * 255, caption="Predicted Mask", use_column_width=True)
 
-    with col3:
+    # Row 3: Damage Photos
+    col1, col2 = st.columns(2)
+    with col1:
         st.image(overlay_ground_truth, caption=f"Actual Damage Category: {selected_damage}", use_column_width=True)
+    with col2:
         st.image(overlay_prediction, caption=f"Predicted Damage Category: {predicted_class}", use_column_width=True)
 
     # Display prediction probabilities
@@ -134,7 +138,6 @@ if selected_image_path.exists():
     ax.set_ylabel('Probability')
     ax.set_title('Defect Class Probabilities')
     st.pyplot(fig)
-
 
 # Introduction
 st.markdown("""
