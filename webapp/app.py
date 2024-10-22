@@ -6,7 +6,7 @@ st.set_page_config(layout="wide")
 # TOML content as a Python string
 toml_content = """
 [[pages]]
-path = "webapp/introduction.py"
+path = "pages/introduction.py"
 name = "Introduction"
 icon = "📖"
 
