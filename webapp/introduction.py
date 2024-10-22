@@ -12,16 +12,16 @@ from pathlib import Path
 
 # Get the directory of the current file and navigate up to the root
 current_dir = Path(__file__).resolve().parent
-root_dir = current_dir.parent.parent
+root_dir = current_dir.parent
 
 # Add the root directory to sys.path
 sys.path.append(str(root_dir))
 
 # Update paths to match your project structure
-unet_model_path = root_dir / '..' / 'models' / 'unet_model_full.h5'
-cnn_model_path = root_dir / '..' / 'models' / 'cnn_model_mask.h5'
-CSV_PATH = root_dir / 'Datasets' / 'Severstal steel defect detection' / 'train.csv'
-IMAGE_DIR = root_dir / 'Datasets' / 'Severstal steel defect detection' / 'train_images'
+unet_model_path = current_dir / 'models' / 'unet_model_full.h5'
+cnn_model_path = current_dir / 'models' / 'cnn_model_mask.h5'
+CSV_PATH = root_dir / 'datasets' / 'data' / 'train.csv'
+IMAGE_DIR = root_dir / 'datasets' / 'data' / 'train_images'
 
 # Load models
 unet_model = load_model(str(unet_model_path))
