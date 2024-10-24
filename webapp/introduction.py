@@ -186,10 +186,10 @@ The Severstal dataset is particularly valuable for this research due to its size
 
 The dataset presents several challenges that our research aims to address:
 
-- **Class Imbalance**: Some defect types are significantly more common than others, which can bias model training.
-- **Multi-label Classification**: Some images contain multiple types of defects, requiring a model that can handle multi-label classification.
-- **Subtle Defects**: Many defects are subtle and difficult to distinguish from normal surface variations, even for human inspectors.
-- **Variable Defect Sizes**: Defects range from small, localized anomalies to large areas covering significant portions of the image.
+1. **Class Imbalance**: Some defect types are significantly more common than others, which can bias model training.
+2. **Multi-label Classification**: Some images contain multiple types of defects, requiring a model that can handle multi-label classification.
+3. **Subtle Defects**: Many defects are subtle and difficult to distinguish from normal surface variations, even for human inspectors.
+4. **Variable Defect Sizes**: Defects range from small, localized anomalies to large areas covering significant portions of the image.
 
 To prepare this dataset for our two-stage approach, we performed several preprocessing steps:
 
@@ -273,10 +273,7 @@ The integration of these two models creates a powerful end-to-end system for def
 3. These ROIs are then fed into the CNN for classification.
 4. The final output includes both the location of defects (from U-Net) and their classification (from CNN).
 
-This two-stage approach allows for:
-- Precise localization of defects, even when they are small or subtle
-- Accurate classification of defects based on their visual characteristics
-- The ability to handle multiple defects in a single image
+This two-stage approach allows for precise localization of defects, even when they are small or subtle, accurate classification of defects based on their visual characteristics, the ability to handle multiple defects in a single image
 
 By combining these complementary architectures, we create a robust system capable of addressing the complex challenge of steel defect detection and classification.
 
