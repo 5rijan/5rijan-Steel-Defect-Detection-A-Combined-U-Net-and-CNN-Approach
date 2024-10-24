@@ -442,7 +442,6 @@ We are also grateful to Severstal for providing the dataset that was crucial for
 st.sidebar.header("Citation")
 bibtex_entry = textwrap.dedent("""
     @misc{srijan2024steel,
-      author = {Srijan Chaudhary},
       title = {Steel Defect Detection: A Combined U-Net and CNN Approach},
       year = {2024},
       publisher = {GitHub},
