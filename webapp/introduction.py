@@ -434,12 +434,14 @@ In conclusion, while our current approach demonstrates significant improvements 
 
 """)
 
-# Add Acknowledgements Section
-st.header("Acknowledgements")
-st.markdown("""
-We extend our sincere gratitude to the **University of Sydney** for providing the resources and support that enabled this research. This project was developed as part of the final project for **ENGG2112**. Our deepest appreciation goes to **Dr. Teng Joon Lim** for his expert guidance throughout the project. 
+# Sidebar for Acknowledgements
+st.sidebar.header("Acknowledgements")
+st.sidebar.markdown("""
+We extend our sincere gratitude to the **University of Sydney** for providing the resources and support that enabled this research. This project was developed as part of the final project for **ENGG2112**. Our deepest appreciation goes to **Dr. Teng Joon Lim** for his expert guidance throughout the project.
 
-Special thanks to our tutor, **Jack Wang**, for his constant feedback, suggestions, and invaluable support, which significantly enhanced the quality of our work. We are also grateful to **Severstal** for providing the dataset that was crucial for this research. Additionally, we acknowledge the contributions of the **open-source community**, whose development and maintenance of tools and libraries made this work possible.
+Special thanks to our tutor, **Jack Wang**, for his constant feedback, suggestions, and invaluable support, which significantly enhanced the quality of our work. We are also grateful to **Severstal** for providing the dataset that was crucial for this research. 
+
+Additionally, we acknowledge the contributions of the **open-source community**, whose development and maintenance of tools and libraries made this work possible.
 """)
 
 # Sidebar for Citation
