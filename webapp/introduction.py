@@ -432,13 +432,17 @@ In conclusion, while our current approach demonstrates significant improvements 
 
 [8] Ribeiro, M. T., Singh, S., & Guestrin, C. (2016). "Why should I trust you?" Explaining the predictions of any classifier. In Proceedings of the 22nd ACM SIGKDD international conference on knowledge discovery and data mining.
 
-## Acknowledgements
-
-We extend our sincere gratitude to the University of Sydney for providing the resources and support that enabled this research. This work was developed as the final project for ENGG2112.
-We would like to express our deepest appreciation to our professor, Dr. Teng Joon Lim, for his guidance and expertise throughout this project. Special thanks to our tutor, Jack Wang, for his constant feedback, suggestions, and invaluable support that significantly enhanced the quality of our work.
-We are also grateful to Severstal for providing the dataset that was crucial for this research. Additionally, we thank the open-source community for developing and maintaining the tools and libraries that made this work possible.
 """)
 
+# Add Acknowledgements Section
+st.header("Acknowledgements")
+st.markdown("""
+We extend our sincere gratitude to the **University of Sydney** for providing the resources and support that enabled this research. This project was developed as part of the final project for **ENGG2112**. Our deepest appreciation goes to **Dr. Teng Joon Lim** for his expert guidance throughout the project. 
+
+Special thanks to our tutor, **Jack Wang**, for his constant feedback, suggestions, and invaluable support, which significantly enhanced the quality of our work. We are also grateful to **Severstal** for providing the dataset that was crucial for this research. Additionally, we acknowledge the contributions of the **open-source community**, whose development and maintenance of tools and libraries made this work possible.
+""")
+
+# Sidebar for Citation
 st.sidebar.header("Citation")
 bibtex_entry = textwrap.dedent("""
     @misc{srijan2024steel,
@@ -450,16 +454,18 @@ bibtex_entry = textwrap.dedent("""
 """)
 st.sidebar.code(bibtex_entry, language="bibtex")
 
+# Sidebar for Project Resources
 st.sidebar.header("Project Resources")
+st.sidebar.markdown("### Notebooks & Documentation 📚")
 
-# Create a button-like element for the notebooks link
-if st.sidebar.button("View All Notebooks 📚"):
-    st.sidebar.markdown("### Available Notebooks:")
-    
-    # Display individual notebook links
-    st.sidebar.markdown("- [CNN Image](https://github.com/5rijan/5rijan-Steel-Defect-Detection-A-Combined-U-Net-and-CNN-Approach/blob/main/notebooks/cnn_image.ipynb)")
-    st.sidebar.markdown("- [CNN Mask](https://github.com/5rijan/5rijan-Steel-Defect-Detection-A-Combined-U-Net-and-CNN-Approach/blob/main/notebooks/cnn_mask.ipynb)")
-    st.sidebar.markdown("- [U-Net Training](https://github.com/5rijan/5rijan-Steel-Defect-Detection-A-Combined-U-Net-and-CNN-Approach/blob/main/notebooks/unet.ipynb)")
-    st.sidebar.markdown("- [U-Net Test](https://github.com/5rijan/5rijan-Steel-Defect-Detection-A-Combined-U-Net-and-CNN-Approach/blob/main/notebooks/test_001.ipynb)")
+# Button-like interface for the notebooks
+if st.sidebar.button("View All Notebooks"):
+    st.sidebar.markdown("""
+    ### Available Notebooks:
+    - [CNN Image](https://github.com/5rijan/5rijan-Steel-Defect-Detection-A-Combined-U-Net-and-CNN-Approach/blob/main/notebooks/cnn_image.ipynb) 📷
+    - [CNN Mask](https://github.com/5rijan/5rijan-Steel-Defect-Detection-A-Combined-U-Net-and-CNN-Approach/blob/main/notebooks/cnn_mask.ipynb) 🎭
+    - [U-Net Training](https://github.com/5rijan/5rijan-Steel-Defect-Detection-A-Combined-U-Net-and-CNN-Approach/blob/main/notebooks/unet.ipynb) 🏋️‍♂️
+    - [U-Net Test](https://github.com/5rijan/5rijan-Steel-Defect-Detection-A-Combined-U-Net-and-CNN-Approach/blob/main/notebooks/test_001.ipynb) 🧪
+    """)
 
-    st.sidebar.markdown
+st.sidebar.markdown("Explore the code and documentation to understand how we approached the problem and leveraged deep learning for defect detection in steel.")
