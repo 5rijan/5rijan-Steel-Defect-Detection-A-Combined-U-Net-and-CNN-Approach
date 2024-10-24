@@ -434,16 +434,6 @@ In conclusion, while our current approach demonstrates significant improvements 
 
 """)
 
-# Sidebar for Acknowledgements
-st.sidebar.header("Acknowledgements")
-st.sidebar.markdown("""
-We extend our sincere gratitude to the **University of Sydney** for providing the resources and support that enabled this research. This project was developed as part of the final project for **ENGG2112**. Our deepest appreciation goes to **Dr. Teng Joon Lim** for his expert guidance throughout the project.
-
-Special thanks to our tutor, **Jack Wang**, for his constant feedback, suggestions, and invaluable support, which significantly enhanced the quality of our work. We are also grateful to **Severstal** for providing the dataset that was crucial for this research. 
-
-Additionally, we acknowledge the contributions of the **open-source community**, whose development and maintenance of tools and libraries made this work possible.
-""")
-
 # Sidebar for Citation
 st.sidebar.header("Citation")
 bibtex_entry = textwrap.dedent("""
@@ -469,5 +459,13 @@ if st.sidebar.button("View All Notebooks"):
     - [U-Net Training](https://github.com/5rijan/5rijan-Steel-Defect-Detection-A-Combined-U-Net-and-CNN-Approach/blob/main/notebooks/unet.ipynb) 🏋️‍♂️
     - [U-Net Test](https://github.com/5rijan/5rijan-Steel-Defect-Detection-A-Combined-U-Net-and-CNN-Approach/blob/main/notebooks/test_001.ipynb) 🧪
     """)
+    
+# Sidebar for Acknowledgements
+st.sidebar.header("Acknowledgements")
+st.sidebar.markdown("""
+We extend our sincere gratitude to the **University of Sydney** for providing the resources and support that enabled this research. This project was developed as part of the final project for **ENGG2112**. Our deepest appreciation goes to **Dr. Teng Joon Lim** for his expert guidance throughout the project.
 
-st.sidebar.markdown("Explore the code and documentation to understand how we approached the problem and leveraged deep learning for defect detection in steel.")
+Special thanks to our tutor, **Jack Wang**, for his constant feedback, suggestions, and invaluable support, which significantly enhanced the quality of our work. We are also grateful to **Severstal** for providing the dataset that was crucial for this research. 
+
+Additionally, we acknowledge the contributions of the **open-source community**, whose development and maintenance of tools and libraries made this work possible.
+""")
