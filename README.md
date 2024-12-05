@@ -34,9 +34,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns  
 import pandas as pd  
 import tensorflow as tf  
-from tensorflow.keras.models import Sequential  
-from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout  
-from sklearn.metrics import accuracy_score, recall_score, precision_score, f1_score, confusion_matrix, classification_report  
 import streamlit  
 ```
 
