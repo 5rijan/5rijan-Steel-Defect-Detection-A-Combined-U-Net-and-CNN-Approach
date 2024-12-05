@@ -49,7 +49,7 @@ pip install -r requirements.txt
 1. Clone the repository:  
    ```bash
    git clone https://github.com/5rijan/Steel-Defect-Detection-A-Combined-U-Net-and-CNN-Approach.git
-   cd steel-defect-detection
+   cd notebooks
    ```  
 
 2. Run the Jupyter notebooks in the `notebooks/` folder to understand and replicate model training.  
