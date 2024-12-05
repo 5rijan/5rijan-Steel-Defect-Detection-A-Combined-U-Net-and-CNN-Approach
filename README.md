@@ -14,14 +14,10 @@ By combining these methodologies, the project enhances production efficiency and
 For a deeper dive into the science, methodology, and mathematics behind the project, as well as live visualizations, visit the web application:  
 [Steel Defect Detection - Live Visualizations](https://steel-defect-detection.streamlit.app/)  
 
----
-
 ## Repository Structure  
 
 - **`notebooks/`**: Jupyter notebooks containing code for model training and evaluation.  
 - **`webapp/`**: Files related to the live web application hosted on Streamlit.  
-
----
 
 ## Installation  
 
@@ -42,8 +38,6 @@ You can install them using pip:
 pip install -r requirements.txt
 ```  
 
----
-
 ## Usage  
 
 1. Clone the repository:  
@@ -58,26 +52,18 @@ pip install -r requirements.txt
    - Navigate to the `webapp/` folder and follow the setup instructions.  
    - Alternatively, visit the [Streamlit app](https://steel-defect-detection.streamlit.app/).  
 
----
-
 ## License  
 
 This project is licensed under the MIT License. See the `LICENSE` file for more details.  
-
----
 
 ## Acknowledgments  
 
 - **Dataset**: We are grateful to Severstal for providing the dataset that was crucial for this research.  
 - **Open-source Community**: A big thank you to the developers and maintainers of the tools and libraries used in this project.  
 
----
-
 ## Contributing  
 
 Contributions are welcome! If you would like to suggest improvements, please open an issue or submit a pull request.  
-
----
 
 ## Contact  
 
